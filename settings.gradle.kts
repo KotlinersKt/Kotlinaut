@@ -17,9 +17,9 @@ pluginManagement {
     }
 }
 
-include("shared")
-include("server")
-include("android", "ios")
-include("web")
+include(":shared")
+include(":server")
+include(":android", ":ios")
+include(":web")
 
 enableFeaturePreview("GRADLE_METADATA")
