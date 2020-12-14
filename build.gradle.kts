@@ -1,9 +1,9 @@
 buildscript {
     repositories {
         gradlePluginPortal()
-        jcenter()
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath(kotlin("gradle-plugin","1.4.21"))
@@ -12,6 +12,7 @@ buildscript {
 }
 
 plugins {
+    idea
     id("com.google.protobuf") version "0.8.14" apply false
 }
 

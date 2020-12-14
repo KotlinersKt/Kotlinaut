@@ -1,4 +1,4 @@
-package com.kotlinerskt.kotlinaut.central
+package com.kotlinerskt.kotlinaut.control
 
 import io.ktor.server.netty.*
 

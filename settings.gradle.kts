@@ -17,11 +17,11 @@ pluginManagement {
     }
 }
 
-include(":proto")
-include(":stub")
-include(":shared")
-include(":server")
-include(":android", ":ios")
-include(":web")
+include("proto")
+include("stub")
+include("shared")
+include("server")
+include("android", "ios")
+include("web")
 
 enableFeaturePreview("GRADLE_METADATA")
