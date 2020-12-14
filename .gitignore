@@ -493,5 +493,8 @@ DerivedData/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+# HPROF
+*.hprof
+
 # End of https://www.toptal.com/developers/gitignore/api/xcode
 n
