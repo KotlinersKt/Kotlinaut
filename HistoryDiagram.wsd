@@ -1,0 +1,11 @@
+@startuml The Kotlinaut
+title The Kotlinaut
+[o-> game:Init game
+note over of game: Chapter 1 
+ref over game: Initial Kotlinaut dialog
+create entity firstMission
+game -> firstMission: re-establishing\ncommunications
+ref over firstMission: Control Chief dialog
+firstMission -> firstMission: Show instructions\nfor manuals
+
+@enduml
