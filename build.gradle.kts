@@ -11,11 +11,6 @@ buildscript {
     }
 }
 
-plugins {
-    idea
-    id("com.google.protobuf") version "0.8.14" apply false
-}
-
 group = "com.kotlinerskt"
 version = "0.1.0"
 

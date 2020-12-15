@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     `java-library`
-    id("com.google.protobuf")
+    id("com.google.protobuf") version "0.8.14"
 }
 
 group = "com.kotlinerskt.kotlinaut"
@@ -28,12 +28,12 @@ protobuf {
     }
 
     plugins {
-        id("grpckt") {
-            artifact = "io.grpc:protoc-gen-grpc-kotlin:1.0.0:jdk7@jar"
-        }
-
         id("grpc") {
             artifact = "io.grpc:protoc-gen-grpc-java:1.34.0"
+        }
+
+        id("grpckt") {
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:1.0.0:jdk7@jar"
         }
     }
 
@@ -60,14 +60,6 @@ java {
     sourceCompatibility = VERSION_1_8
     targetCompatibility = VERSION_1_8
 }
-
-//kotlin {
-//    sourceSets {
-//        main {
-//            this.kotlin.srcDir("build/generated/source/proto/main/grpckt")
-//        }
-//    }
-//}
 
 tasks {
     withType<KotlinCompile> {
