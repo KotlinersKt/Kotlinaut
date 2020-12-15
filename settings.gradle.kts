@@ -17,7 +17,6 @@ pluginManagement {
     }
 }
 
-include("proto")
 include("stub")
 include("shared")
 include("server")

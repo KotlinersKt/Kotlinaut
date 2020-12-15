@@ -1,5 +1,4 @@
 import com.google.protobuf.gradle.*
-import org.gradle.api.JavaVersion.VERSION_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -11,8 +10,6 @@ plugins {
 group = "com.kotlinerskt.kotlinaut"
 
 dependencies {
-    protobuf(project(":proto"))
-
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
 
@@ -20,6 +17,16 @@ dependencies {
     api("io.grpc:grpc-stub:1.34.0")
     api("io.grpc:grpc-protobuf:1.34.0")
     api("io.grpc:grpc-kotlin-stub:1.0.0")
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir("${protobuf.protobuf.generatedFilesBaseDir}/main/java")
+            srcDir("${protobuf.protobuf.generatedFilesBaseDir}/main/grpc")
+            srcDir("${protobuf.protobuf.generatedFilesBaseDir}/main/grpckt")
+        }
+    }
 }
 
 protobuf {
@@ -37,35 +44,26 @@ protobuf {
         }
     }
 
-    generatedFilesBaseDir = "${project.buildDir}/gen/src"
-
     generateProtoTasks {
         all().forEach { task ->
-            task.plugins.register("grpc")
-            task.plugins.register("grpckt")
+            task.plugins {
+                id("grpc")
+                id("grpckt")
+            }
         }
     }
 }
 
-//sourceSets {
-//    main {
-//        java {
-//            srcDir("build/generated/source/proto/main/java")
-//            srcDir("build/generated/source/proto/main/grpc")
-//        }
-//    }
-//}
-
 java {
-    sourceCompatibility = VERSION_1_8
-    targetCompatibility = VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
 }
 
 tasks {
     withType<KotlinCompile> {
         all {
-            sourceCompatibility = VERSION_1_8.toString()
-            targetCompatibility = VERSION_1_8.toString()
+            sourceCompatibility = JavaVersion.VERSION_1_7.toString()
+            targetCompatibility = JavaVersion.VERSION_1_7.toString()
         }
     }
 }
