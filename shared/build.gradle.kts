@@ -61,7 +61,13 @@ kotlin {
             }
         }
 
-        val jvmMain by getting
+        val jvmMain by getting {
+            dependencies {
+                implementation(project(":stub"))
+
+                api("com.google.protobuf:protobuf-java-util:3.14.0")
+            }
+        }
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit5"))
@@ -89,6 +95,12 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
+                implementation(project(":stub-android"))
+
+                implementation("androidx.appcompat:appcompat:1.2.0")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
+
                 implementation("com.google.android.material:material:1.2.1")
             }
         }

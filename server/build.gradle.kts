@@ -30,6 +30,11 @@ tasks {
 
 dependencies {
     implementation(project(":shared"))
+    implementation(project(":stub"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+
+    runtimeOnly("io.grpc:grpc-netty:1.34.0")
 
     implementation("io.ktor:ktor-server-core:1.4.3")
     implementation("io.ktor:ktor-server-netty:1.4.3")
