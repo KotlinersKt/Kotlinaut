@@ -17,7 +17,8 @@ pluginManagement {
     }
 }
 
-include("stub")
+include("proto")
+include("stub", "stub-android")
 include("shared")
 include("server")
 include("android", "ios")

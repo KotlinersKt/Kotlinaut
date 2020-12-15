@@ -10,6 +10,8 @@ plugins {
 group = "com.kotlinerskt.kotlinaut"
 
 dependencies {
+    protobuf(project(":proto"))
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
 
