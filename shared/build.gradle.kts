@@ -63,7 +63,7 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                implementation(project(":stub"))
+                api(project(":stub"))
 
                 api("com.google.protobuf:protobuf-java-util:3.14.0")
             }
