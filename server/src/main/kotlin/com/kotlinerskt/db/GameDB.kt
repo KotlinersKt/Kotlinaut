@@ -1,7 +1,5 @@
 package com.kotlinerskt.db
 
-import com.kotlinerskt.kotlinaut.game.GameStatus
-
 typealias GameId = Pair<String, String>
 
 class GameDB {

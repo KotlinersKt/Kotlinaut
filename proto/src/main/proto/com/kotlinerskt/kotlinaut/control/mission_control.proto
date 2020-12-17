@@ -61,12 +61,6 @@ message MissionResponse {
   repeated Interaction available_interactions = 2;
 }
 
-service ControlCenter {
-  rpc Hello (MissionRequest) returns (MissionResponse) {}
-
-  rpc StartMission (MissionRequest) returns (stream MissionResponse) {}
-
-  rpc SendMessage(stream MissionRequest) returns (MissionResponse) {}
-
-  rpc ChatKotlinaut (stream MissionRequest) returns (stream MissionResponse) {}
+service MissionControlService {
+  rpc Interact (MissionRequest) returns (stream MissionResponse) {}
 }

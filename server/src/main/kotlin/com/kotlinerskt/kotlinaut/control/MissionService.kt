@@ -5,20 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 class MissionService(
     private val gameDB: GameDB
-) : ControlCenterGrpcKt.ControlCenterCoroutineImplBase() {
-    override fun startMission(request: MissionRequest): Flow<MissionResponse> {
-        return super.startMission(request)
-    }
+) : MissionControlServiceGrpcKt.MissionControlServiceCoroutineImplBase() {
 
-    override suspend fun sendMessage(requests: Flow<MissionRequest>): MissionResponse {
-        return super.sendMessage(requests)
-    }
-
-    override fun chatKotlinaut(requests: Flow<MissionRequest>): Flow<MissionResponse> {
-        return super.chatKotlinaut(requests)
-    }
-
-    override suspend fun hello(request: MissionRequest): MissionResponse {
-        return super.hello(request)
+    override fun interact(request: MissionRequest): Flow<MissionResponse> {
+        return super.interact(request)
     }
 }

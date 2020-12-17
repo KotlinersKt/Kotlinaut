@@ -1,6 +1,7 @@
 package com.kotlinerskt.kotlinaut
 
-import com.kotlinerskt.kotlinaut.control.ControlCenterGrpcKt
+import android.util.Log
+import com.kotlinerskt.kotlinaut.control.MissionControlServiceGrpcKt
 import com.kotlinerskt.kotlinaut.control.MissionRequest
 import com.kotlinerskt.kotlinaut.control.MissionResponse
 import com.kotlinerskt.kotlinaut.control.PlayerInfo
@@ -13,13 +14,17 @@ class Operator {
         .usePlaintext()
         .build()
 
-    private val stub: ControlCenterGrpcKt.ControlCenterCoroutineStub by lazy { ControlCenterGrpcKt.ControlCenterCoroutineStub(channel) }
+    private val stub by lazy {
+        MissionControlServiceGrpcKt.MissionControlServiceCoroutineStub(channel)
+    }
 
     suspend fun startMission() {
-        val request = MissionRequest.newBuilder().setPlayerInfo(PlayerInfo.getDefaultInstance()).build()
-        val response: Flow<MissionResponse> = stub.startMission(request)
-        response.collect {
 
+        val request = MissionRequest.newBuilder().setPlayerInfo(PlayerInfo.getDefaultInstance()).build()
+        val response: Flow<MissionResponse> = stub.interact(request)
+        response.collect {
+            Log.d("OperatorLib", "Arriving message…")
+            Log.d("OperatorLib", "$it")
         }
     }
 }

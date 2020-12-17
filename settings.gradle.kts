@@ -21,6 +21,7 @@ include("proto")
 include("stub", "stub-android")
 include("shared")
 include("server")
+include("bot")
 include("android", "ios")
 include("web")
 

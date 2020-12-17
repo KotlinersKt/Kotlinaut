@@ -8,6 +8,7 @@ plugins {
 
 kotlin {
     android()
+
     ios {
         binaries {
             framework {
@@ -18,7 +19,9 @@ kotlin {
 
     jvm {
         compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
+            kotlinOptions {
+                jvmTarget = JavaVersion.VERSION_1_8.toString()
+            }
         }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
@@ -45,13 +48,13 @@ kotlin {
     }
 
     sourceSets {
-        all {
-            languageSettings.apply {
+//        all {
+//            languageSettings.apply {
 //                useExperimentalAnnotation("kotlin.RequiresOptIn")
 //                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
 //                useExperimentalAnnotation("kotlinx.serialization.InternalSerializationApi")
-            }
-        }
+//            }
+//        }
 
         val commonMain by getting
         val commonTest by getting {
@@ -65,7 +68,7 @@ kotlin {
             dependencies {
                 api(project(":stub"))
 
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
 
                 api("com.google.protobuf:protobuf-java-util:3.14.0")
 

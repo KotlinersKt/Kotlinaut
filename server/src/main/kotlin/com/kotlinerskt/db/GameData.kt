@@ -1,4 +1,4 @@
-package com.kotlinerskt.kotlinaut.game
+package com.kotlinerskt.db
 
 import com.kotlinerskt.kotlinaut.control.MissionResponse
 
@@ -13,7 +13,7 @@ data class Chapter(
 data class Mission(
     val id: String,
     val name: String,
-    val contents: List<MissionResponse.GameText>,
+    val contents: List<MissionResponse.GameText> = emptyList(),
 )
 
 data class GameStatus(

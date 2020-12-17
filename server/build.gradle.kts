@@ -38,8 +38,6 @@ tasks {
 dependencies {
     implementation(project(":shared"))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
-
     implementation("io.arrow-kt:arrow-core:0.11.0")
     implementation("io.arrow-kt:arrow-syntax:0.11.0")
     kapt("io.arrow-kt:arrow-meta:0.11.0")
