@@ -52,8 +52,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.2")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1")
-
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
