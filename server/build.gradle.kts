@@ -3,6 +3,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     application
+    kotlin("kapt")
+}
+
+repositories {
+    maven {
+        url = uri("https://dl.bintray.com/arrow-kt/arrow-kt/")
+    }
 }
 
 group = "com.kotlinerskt.kotlinaut.server"
@@ -30,18 +37,12 @@ tasks {
 
 dependencies {
     implementation(project(":shared"))
-    implementation(project(":stub"))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+    implementation("io.arrow-kt:arrow-core:0.11.0")
+    implementation("io.arrow-kt:arrow-syntax:0.11.0")
+    kapt("io.arrow-kt:arrow-meta:0.11.0")
 
     runtimeOnly("io.grpc:grpc-netty:1.34.0")
-
-    implementation("io.ktor:ktor-server-core:1.4.3")
-    implementation("io.ktor:ktor-server-netty:1.4.3")
-    implementation("io.ktor:ktor-html-builder:1.4.3")
-    implementation("org.jetbrains:kotlin-css-jvm:1.0.0-pre.129-kotlin-1.4.20")
-
-    implementation("ch.qos.logback:logback-classic:1.3.0-alpha5")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter", "junit-jupiter-api", "5.7.0")
@@ -50,7 +51,13 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
     testImplementation("io.kotest:kotest-assertions-core:4.3.1")
 
-    testImplementation("io.ktor:ktor-server-tests:1.4.3")
-
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+}
+
+
+task("runServer", JavaExec::class) {
+    dependsOn("classes")
+    classpath = sourceSets["main"].runtimeClasspath
+
+    mainClass.set("com.kotlinerskt.kotlinaut.KotlinautGameServerKt")
 }

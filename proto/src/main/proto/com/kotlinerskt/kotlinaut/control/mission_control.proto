@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+option  java_multiple_files = true;
+option java_package = "com.kotlinerskt.kotlinaut.control";
+option java_outer_classname = "CentralProto";
+
+package control;
+
+enum TextType {
+  //Use for explanations from a third person
+  NARRATOR = 0;
+  //Use as a decorator to describe the chapter (Capitulo 1)
+  CHAPTER = 1;
+  //Use as a decorator to describe the current mission
+  MISSION = 2;
+  //Message sent by the Kotlinaut
+  KOTLINAUT = 3;
+  //Your stupid boss not helping
+  BOSS = 4;
+  //Explanations/Manuals/Descriptions
+  PLAIN = 5;
+  //You sent an invalid command so... error for you
+  ERROR = 6;
+}
+
+/*
+ * Currently as the idea the server will tell the game what to render AND the clients will answer with
+ * one of this, at the beginning it won't be mixed of them, but as the player unlocks commands it will
+ * have more options to send.
+ */
+enum InteractionType {
+  MESSAGE = 0;
+  ACTION = 1;
+  COMMAND = 2;
+}
+
+message Interaction {
+  InteractionType type = 1;
+  string value = 2;
+}
+
+message PlayerInfo {
+  string client_id = 1;
+  string token = 2;
+}
+
+message MissionRequest {
+  PlayerInfo player_info = 1;
+  Interaction interaction = 2;
+}
+
+message MissionResponse {
+  message GameText {
+    TextType type = 1;
+    string text = 2;
+  }
+
+  GameText content = 1;
+
+  //This will be incremental on each mission as the player unlocks things
+  repeated Interaction available_interactions = 2;
+}
+
+service MissionControlService {
+  rpc Interact (MissionRequest) returns (stream MissionResponse) {}
+}
