@@ -65,7 +65,11 @@ kotlin {
             dependencies {
                 api(project(":stub"))
 
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1")
+
                 api("com.google.protobuf:protobuf-java-util:3.14.0")
+
+                runtimeOnly("io.grpc:grpc-netty:1.34.0")
             }
         }
         val jvmTest by getting {

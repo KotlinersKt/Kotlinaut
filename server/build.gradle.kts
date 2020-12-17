@@ -61,5 +61,5 @@ task("runServer", JavaExec::class) {
     dependsOn("classes")
     classpath = sourceSets["main"].runtimeClasspath
 
-    mainClass.set("com.kotlinerskt.kotlinaut.control.KotlinautGameServerKt")
+    mainClass.set("com.kotlinerskt.kotlinaut.KotlinautGameServerKt")
 }

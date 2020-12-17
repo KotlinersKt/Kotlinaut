@@ -1,6 +1,7 @@
 package com.kotlinerskt.kotlinaut
 
 import com.kotlinerskt.db.GameDB
+import com.kotlinerskt.kotlinaut.control.MissionService
 import com.kotlinerskt.kotlinaut.game.GameService
 import io.grpc.ServerBuilder
 
@@ -11,6 +12,7 @@ class KotlinautGameServer(
 
     private val server = ServerBuilder.forPort(port)
         .addService(GameService(gameDB))
+        .addService(MissionService(gameDB))
         .build()
 
     fun start() {

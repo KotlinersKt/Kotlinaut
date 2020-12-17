@@ -28,14 +28,14 @@ enum TextType {
  * one of this, at the beginning it won't be mixed of them, but as the player unlocks commands it will
  * have more options to send.
  */
-enum CommandType {
+enum InteractionType {
   MESSAGE = 0;
-  BUTTON = 1;
-  ACTION = 2;
+  ACTION = 1;
+  COMMAND = 2;
 }
 
-message Command {
-  CommandType type = 1;
+message Interaction {
+  InteractionType type = 1;
   string value = 2;
 }
 
@@ -46,7 +46,7 @@ message PlayerInfo {
 
 message MissionRequest {
   PlayerInfo player_info = 1;
-  Command command = 2;
+  Interaction interaction = 2;
 }
 
 message MissionResponse {
@@ -58,9 +58,15 @@ message MissionResponse {
   GameText content = 1;
 
   //This will be incremental on each mission as the player unlocks things
-  repeated Command available_commands = 2;
+  repeated Interaction available_interactions = 2;
 }
 
 service ControlCenter {
+  rpc Hello (MissionRequest) returns (MissionResponse) {}
+
   rpc StartMission (MissionRequest) returns (stream MissionResponse) {}
+
+  rpc SendMessage(stream MissionRequest) returns (MissionResponse) {}
+
+  rpc ChatKotlinaut (stream MissionRequest) returns (stream MissionResponse) {}
 }

@@ -19,16 +19,6 @@ dependencies {
     api("io.grpc:grpc-kotlin-stub-lite:1.0.0")
 }
 
-//sourceSets {
-//    main {
-//        java {
-//            srcDir("${protobuf.protobuf.generatedFilesBaseDir}/main/java")
-//            srcDir("${protobuf.protobuf.generatedFilesBaseDir}/main/grpc")
-//            srcDir("${protobuf.protobuf.generatedFilesBaseDir}/main/grpckt")
-//        }
-//    }
-//}
-
 android {
     compileSdkVersion(30)
     buildToolsVersion = "30.0.2"
