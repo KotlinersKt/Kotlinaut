@@ -13,6 +13,6 @@ class GRPCLoginRepository constructor(
     override suspend fun starNewAdventure(newAdventureRequest: NewAdventureRequest): NewAdventureResponse =
         withContext(dispatcher) {
             // TODO: 17/12/20 Dummy implementation 
-            NewAdventureResponse(newAdventureRequest.userId.reversed())
+            NewAdventureResponse(newAdventureRequest.userId, newAdventureRequest.userId.reversed())
         }
 }
