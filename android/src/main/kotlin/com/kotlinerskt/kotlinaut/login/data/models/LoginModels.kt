@@ -5,5 +5,6 @@ data class NewAdventureRequest(
 )
 
 data class NewAdventureResponse(
+    val userId: String,
     val userToken: String
 )
