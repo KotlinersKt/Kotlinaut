@@ -12,12 +12,14 @@ tasks {
     }
 }
 
+
 dependencies {
     implementation(project(":shared"))
+    implementation("com.github.kotlin-telegram-bot.kotlin-telegram-bot:dispatcher:6.0.1")
 }
 
 task("runBot", JavaExec::class){
     dependsOn("classes")
     classpath = sourceSets["main"].runtimeClasspath
-    mainClass.set("com.kotlinerskt.kotlinaut.bot.BotClientKt")
+    mainClass.set("com.kotlinerskt.kotlinaut.TelegramBotKt")
 }

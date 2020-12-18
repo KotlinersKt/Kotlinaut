@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath(kotlin("gradle-plugin","1.4.21"))
+        classpath(kotlin("gradle-plugin", "1.4.21"))
         classpath("com.android.tools.build:gradle:4.0.2")
     }
 }
@@ -18,6 +18,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
         jcenter()
     }
 }
