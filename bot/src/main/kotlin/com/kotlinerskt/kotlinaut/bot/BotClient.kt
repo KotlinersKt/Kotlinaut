@@ -34,7 +34,7 @@ class BotClient(
                     PlayerInfo.newBuilder().setClientId(registerInfo.clientId).setToken(registerInfo.token).build()
                 )
                 .setInteraction(
-                    Interaction.newBuilder().setType(InteractionType.MESSAGE).setValue("").build()
+                    Interaction.newBuilder().setType(InteractionType.MESSAGE).setValue("/start-alv").build()
                 )
                 .build()
         )

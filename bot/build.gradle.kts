@@ -16,7 +16,7 @@ dependencies {
     implementation(project(":shared"))
 }
 
-task("testBot", JavaExec::class){
+task("runBot", JavaExec::class){
     dependsOn("classes")
     classpath = sourceSets["main"].runtimeClasspath
     mainClass.set("com.kotlinerskt.kotlinaut.bot.BotClientKt")
