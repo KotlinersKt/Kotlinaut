@@ -49,6 +49,7 @@ class LogInFragment : Fragment() {
     private fun setupView(binding: FragmentLoginBinding) {
         with(binding) {
             root.setOnClickListener {
+                userId.text = null
                 userIdGroup.visibility = View.GONE
             }
             showUserId.setOnClickListener {
