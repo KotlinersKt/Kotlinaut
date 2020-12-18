@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Kotlinaout</string>
+    <string name="app_name" translatable="false">Kotlinaout</string>
+    <string name="kotlinaout_login_title">Welcome to Kotlinaout: The Adventure</string>
+    <string name="kotlinaout_login_legend">Before start, Do you have any previous adventure?</string>
+    <string name="kotlinaout_login_new_adventure">New Adventure</string>
+    <string name="kotlinaout_login_resume_adventure">Resume where I left</string>
 </resources>
