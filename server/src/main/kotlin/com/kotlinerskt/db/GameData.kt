@@ -47,13 +47,7 @@ private fun chapterOne(): Chapter = Chapter(
                         …
                         Necesito Ayuda.
                     """.trimIndent()
-                    ).build()
-            ),
-        ),
-        Mission(
-            "m-1-1",
-            "Restableciendo comunicaciones",
-            listOf(
+                    ).build(),
                 MissionResponse.GameText.newBuilder().setType(TextType.MISSION).setText("Restableciendo Comunicaciones")
                     .build(),
                 MissionResponse.GameText.newBuilder().setType(TextType.BOSS)
@@ -66,14 +60,16 @@ private fun chapterOne(): Chapter = Chapter(
                     .setText("Tu primer tarea sera arreglar el tablero de comunicaciones, te ayudaría pero…surgió algo…Estos son algunos comandos básicos que te ayudaran, no tengo tiempo de explicarlos pero seguro sabras para que funcionan cada uno, bueno, debo correr.")
                     .build(),
                 MissionResponse.GameText.newBuilder().setType(TextType.NARRATOR)
-                    .setText("""
+                    .setText(
+                        """
                         Puedes escribir 
                         
                         /manuales
                         
-                        para consultar los manuales disponibles y las diferentes acciones disponibles para completar las misiones""".trimIndent())
-                    .build(),
-            )
+                        para consultar los manuales disponibles y las diferentes acciones disponibles para completar las misiones""".trimIndent()
+                    )
+                    .build()
+            ),
         )
     )
 )

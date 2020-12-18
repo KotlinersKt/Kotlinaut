@@ -3,10 +3,7 @@ package com.kotlinerskt.kotlinaut.control
 import com.kotlinerskt.db.GameDB
 import com.kotlinerskt.db.GameId
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.*
 
 class MissionService(
     private val gameDB: GameDB
@@ -16,28 +13,20 @@ class MissionService(
         val gameId = GameId(request.playerInfo.clientId, request.playerInfo.token)
         val gameStatus = gameDB[gameId]
 
-        return gameStatus.currentMission.contents.asFlow()
-            .map {
-                delay(3000)
+
+        return flow {
+            val responses = gameStatus.currentMission.contents.map {
                 MissionResponse.newBuilder()
                     .setContent(it)
                     .build()
             }
-            .onCompletion {
-                gameStatus.
+
+            responses.forEach {
+                delay(3000)
+                emit(it)
             }
 
-//        return flow {
-//            val responses = gameStatus.currentMission.contents.map {
-//                MissionResponse.newBuilder()
-//                    .setContent(it)
-//                    .build()
-//            }
-//
-//            responses.forEach {
-//                emit(it)
-//                delay(3000)
-//            }
-//        }
+
+        }
     }
 }
