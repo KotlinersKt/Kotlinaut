@@ -53,6 +53,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
 
+    implementation ("com.jakewharton.timber:timber:4.7.1")
+
 //    implementation("com.google.dagger:hilt-android:2.28-alpha")
 //    kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
 //
