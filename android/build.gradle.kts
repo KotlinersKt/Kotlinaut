@@ -63,8 +63,6 @@ dependencies {
 //    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
 //    kapt("androidx.hilt:hilt-compiler:1.0.0-alpha02")
 
-    implementation("io.coil-kt:coil:1.1.0")
-
     testImplementation("junit:junit:4.+")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
 
