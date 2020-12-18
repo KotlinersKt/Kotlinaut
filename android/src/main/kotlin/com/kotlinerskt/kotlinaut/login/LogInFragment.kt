@@ -11,11 +11,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.kotlinerskt.kotlinaut.databinding.FragmentLoginBinding
 import com.kotlinerskt.kotlinaut.login.data.GRPCLoginRepository
 import com.kotlinerskt.kotlinaut.login.usecase.NewAdventureUseCase
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onCompletion
 import timber.log.Timber
 
 class LogInFragment : Fragment() {
 
+    private var uiStateJob: Job? = null
     private val viewModel: LoginViewModel by viewModels {
         LoginViewModelFactory(NewAdventureUseCase(GRPCLoginRepository()))
     }
@@ -32,18 +35,28 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launchWhenStarted {
-            viewModel.state.collect { state ->
-                when (state) {
-                    LoginViewModel.State.Idle -> Unit
-                    LoginViewModel.State.Loading -> showSnackMessage(view, "Loading")
-                    LoginViewModel.State.StartAdventure -> Timber.i("Start Adventure Please")
-                    is LoginViewModel.State.Error -> {
-                        showSnackMessage(view, state.errorMessage)
+        uiStateJob = lifecycleScope.launchWhenStarted {
+            viewModel.state
+                .onCompletion {
+                    Timber.i("Finishing")
+                    showSnackMessage(view, "Finishing")
+                }
+                .collect { state ->
+                    when (state) {
+                        LoginViewModel.State.Idle -> Unit
+                        LoginViewModel.State.Loading -> showSnackMessage(view, "Loading")
+                        LoginViewModel.State.StartAdventure -> Timber.i("Start Adventure Please")
+                        is LoginViewModel.State.Error -> {
+                            showSnackMessage(view, state.errorMessage)
+                        }
                     }
                 }
-            }
         }
+    }
+
+    override fun onStop() {
+        uiStateJob?.cancel()
+        super.onStop()
     }
 
     private fun setupView(binding: FragmentLoginBinding) {
