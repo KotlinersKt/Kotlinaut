@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="kotlinaout_login_title">Bienvenido a Kotlinaout: La Aventura</string>
-    <string name="kotlinaout_login_legend">Antes de iniciar, Tienes una aventura anterior?</string>
-    <string name="kotlinaout_login_new_adventure">Nueva Aventura</string>
-    <string name="kotlinaout_login_resume_adventure">Iniciar donde me quedé</string>
+    <string name="login_title">Bienvenido a Kotlinaout: La Aventura</string>
+    <string name="login_legend">Antes de iniciar, Tienes una aventura anterior?</string>
+    <string name="new_adventure_text">New Adventure</string>
+    <string name="start_new_adventure">Empezar</string>
+    <string name="resume_adventure">Iniciar donde me quedé</string>
 </resources>
