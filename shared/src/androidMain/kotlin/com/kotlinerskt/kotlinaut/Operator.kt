@@ -10,17 +10,31 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 
 class Operator {
-    val channel = ManagedChannelBuilder.forAddress("localhost", 8490)
+    val channel = ManagedChannelBuilder.forAddress("192.168.100.7", 8490)
         .usePlaintext()
         .build()
 
-    private val stub by lazy {
+    private val gameStub by lazy {
+        GameGrpcKt.GameCoroutineStub(channel)
+    }
+    private val missionStub by lazy {
         MissionControlServiceGrpcKt.MissionControlServiceCoroutineStub(channel)
     }
 
-    suspend fun startMission() {
-        val request = MissionRequest.newBuilder().setPlayerInfo(PlayerInfo.getDefaultInstance()).build()
-        val response: Flow<MissionResponse> = stub.interact(request)
+    suspend fun register(clientId: String): RegisterClientResponse {
+        val gameRequest = RegisterClientRequest
+            .newBuilder()
+            .setClientId(clientId)
+            .build()
+
+        return gameStub.register(gameRequest)
+    }
+
+    suspend fun startMission(clientId: String) {
+        val request =
+            MissionRequest.newBuilder().setPlayerInfo(PlayerInfo.getDefaultInstance()).build()
+
+        val response: Flow<MissionResponse> = missionStub.interact(request)
         response.collect {
             Log.d("OperatorLib", "Arriving message…")
             Log.d("OperatorLib", "$it")
