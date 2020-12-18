@@ -21,5 +21,5 @@ dependencies {
 task("runBot", JavaExec::class){
     dependsOn("classes")
     classpath = sourceSets["main"].runtimeClasspath
-    mainClass.set("com.kotlinerskt.kotlinaut.bot.BotClientKt")
+    mainClass.set("com.kotlinerskt.kotlinaut.TelegramBotKt")
 }
