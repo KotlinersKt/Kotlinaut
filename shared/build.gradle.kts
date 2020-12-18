@@ -102,13 +102,15 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
-                implementation(project(":stub-android"))
+                api(project(":stub-android"))
 
-                implementation("androidx.appcompat:appcompat:1.2.0")
+                api("io.grpc:grpc-okhttp:1.34.0")
+                api("io.grpc:grpc-protobuf-lite:1.34.0")
+                api("io.grpc:grpc-stub:1.34.0")
+                api("javax.annotation:javax.annotation-api:1.3.2")
 
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
-
-                implementation("com.google.android.material:material:1.2.1")
+                api("androidx.appcompat:appcompat:1.2.0")
+                api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
             }
         }
         val androidTest by getting {
