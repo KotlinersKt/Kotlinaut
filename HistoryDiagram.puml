@@ -1,11 +1,72 @@
 @startuml The Kotlinaut
-title The Kotlinaut
-[o-> game:Init game
-note over of game: Chapter 1 
-ref over game: Initial Kotlinaut dialog
-create entity firstMission
-game -> firstMission: re-establishing\ncommunications
-ref over firstMission: Control Chief dialog
-firstMission -> firstMission: Show instructions\nfor manuals
+
+|Cliente|
+:Inicia cliente;
+:Solicitar registro (envia id) :: GameService#register;
+
+|Usuario|
+
+
+|Servicio de Registro (Stub GameService)|
+:Crea token;
+
+|Fake DB|
+:Almacenar token;
+:Crear nuevo juego ligado a token;
+
+|Servicio de Registro (Stub GameService)|
+:Crea Respuesta con token;
+
+|Cliente|
+:Almacenar (ClientId,Token);
+:Enviar interaccion inicial (`/start-alv`);
+
+|Servicio de missiones|
+:Detectar comando inicial;
+:Generar Flow de primeros textos;
+:Enviar Flow a cliente;
+
+|Cliente|
+:Muestra contenido inicial desde Flow;
+:Muestra mensaje de `/manuales`;
+:Esperar input de usuario;
+
+|Usuario|
+:Ingresa texto;
+if (texto == /manuales) then (simon)
+    #palegreen:Enviar [/tablero];
+    |Cliente|
+    :Enviar interaccion /tablero;
+
+    |Servicio de missiones|
+    :Enviar identificador imagen tablero;
+    :Agregar comando /fix a Features;
+
+    |Cliente|
+    :Mostrar imagen de tablero;
+    repeat :Esperar input;
+    :Mandar multiples inputs a missiones;
+
+    |Servicio de missiones|
+    :Procesar input;
+    repeat while (comando == /fix parameters) is (No) not (Yes)
+
+    :Enviar resto de la mision;
+    |Cliente|
+    :Mostrar felicitaciones;
+    stop
+else (no)
+    |Usuario|
+    :Iniciar Conteo necio -> 1;
+    if (conteo > 2) then (yes pinche necio)
+        #pink:Mandar mensaje pasivo agresivo;
+        #pink:No juegas chido GAME OVER;
+        stop
+    else (no)
+        #pink:Error -> "Comando invalidado";
+        :Repetir input;
+        stop
+    endif
+endif
 
 @enduml
