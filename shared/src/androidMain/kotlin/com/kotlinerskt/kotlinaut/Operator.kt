@@ -19,7 +19,6 @@ class Operator {
     }
 
     suspend fun startMission() {
-
         val request = MissionRequest.newBuilder().setPlayerInfo(PlayerInfo.getDefaultInstance()).build()
         val response: Flow<MissionResponse> = stub.interact(request)
         response.collect {

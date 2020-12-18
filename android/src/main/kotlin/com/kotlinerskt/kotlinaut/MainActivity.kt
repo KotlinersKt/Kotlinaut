@@ -8,8 +8,9 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
 
-//        operator.startMission()
-
+    suspend fun loQueSea(){
+        operator.startMission()
     }
 }

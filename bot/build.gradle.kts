@@ -18,7 +18,7 @@ dependencies {
     implementation("com.github.kotlin-telegram-bot.kotlin-telegram-bot:dispatcher:6.0.1")
 }
 
-task("testBot", JavaExec::class){
+task("runBot", JavaExec::class){
     dependsOn("classes")
     classpath = sourceSets["main"].runtimeClasspath
     mainClass.set("com.kotlinerskt.kotlinaut.bot.BotClientKt")
