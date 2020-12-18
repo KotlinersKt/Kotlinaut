@@ -1,16 +1,15 @@
 package com.kotlinerskt.kotlinaut
 
-import android.app.Activity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.kotlinerskt.kotlinaut.databinding.ActivityMainBinding
 
-class MainActivity : Activity() {
-    private val operator: Operator = Operator()
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
-
-    suspend fun loQueSea(){
-        operator.startMission()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

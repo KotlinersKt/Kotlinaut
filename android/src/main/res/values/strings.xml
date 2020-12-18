@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Kotlinaout</string>
+    <string name="login_title">Welcome to Kotlinaout: The Adventure</string>
+    <string name="login_legend">Before start, Do you have any previous adventure?</string>
+    <string name="new_adventure_text">New Adventure</string>
+    <string name="start_new_adventure">Start</string>
+    <string name="resume_adventure">Resume where I left</string>
+    <string name="userid_hint" translatable="false">\@UserId</string>
+</resources>
