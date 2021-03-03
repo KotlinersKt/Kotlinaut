@@ -104,7 +104,7 @@ kotlin {
             dependencies {
                 api(project(":stub-android"))
 
-                api("io.grpc:grpc-okhttp:1.34.0")
+                api("io.grpc:grpc-okhttp:1.34.1")
                 api("io.grpc:grpc-protobuf-lite:1.34.0")
                 api("io.grpc:grpc-stub:1.34.0")
                 api("javax.annotation:javax.annotation-api:1.3.2")

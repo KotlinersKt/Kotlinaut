@@ -10,19 +10,15 @@ import java.util.*
 class GameService(
     private val gameDB: GameDB,
 ) : GameGrpcKt.GameCoroutineImplBase() {
+
     override suspend fun register(request: RegisterClientRequest): RegisterClientResponse {
         val clientId = request.clientId
+
         val token = generateToken(clientId)
 
         gameDB.registerOrRestart(GameId(clientId, token))
 
-        return RegisterClientResponse
-            .newBuilder()
-            .setClientId(clientId)
-            .setToken(token)
-            .build()
+        return clientResponse(clientId, token)
     }
 }
-
-fun generateToken(id: String): String = "$id:${UUID.randomUUID()}".reversed()
 

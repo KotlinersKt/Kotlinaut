@@ -3,13 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     application
-    kotlin("kapt")
-}
-
-repositories {
-    maven {
-        url = uri("https://dl.bintray.com/arrow-kt/arrow-kt/")
-    }
 }
 
 group = "com.kotlinerskt.kotlinaut.server"
@@ -38,10 +31,6 @@ tasks {
 dependencies {
     implementation(project(":shared"))
 
-    implementation("io.arrow-kt:arrow-core:0.11.0")
-    implementation("io.arrow-kt:arrow-syntax:0.11.0")
-    kapt("io.arrow-kt:arrow-meta:0.11.0")
-
     runtimeOnly("io.grpc:grpc-netty:1.34.0")
 
     testImplementation(kotlin("test-junit5"))
@@ -60,4 +49,15 @@ task("runServer", JavaExec::class) {
     classpath = sourceSets["main"].runtimeClasspath
 
     mainClass.set("com.kotlinerskt.kotlinaut.KotlinautGameServerKt")
+}
+repositories {
+    mavenCentral()
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
 }

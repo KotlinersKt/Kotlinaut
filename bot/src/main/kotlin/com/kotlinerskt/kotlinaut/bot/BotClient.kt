@@ -36,7 +36,10 @@ class BotClient(
         val dataFlow = missionStub.interact(
             MissionRequest.newBuilder()
                 .setPlayerInfo(
-                    PlayerInfo.newBuilder().setClientId(registerInfo.clientId).setToken(registerInfo.token).build()
+                    PlayerInfo.newBuilder()
+                        .setClientId(registerInfo.clientId)
+                        .setToken(registerInfo.token)
+                        .build()
                 )
                 .setInteraction(
                     Interaction.newBuilder().setType(InteractionType.MESSAGE).setValue("/start-alv").build()

@@ -19,6 +19,7 @@ dependencies {
     api("io.grpc:grpc-stub:1.34.0")
     api("io.grpc:grpc-protobuf:1.34.0")
     api("io.grpc:grpc-kotlin-stub:1.0.0")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 sourceSets {
@@ -68,4 +69,15 @@ tasks {
             targetCompatibility = JavaVersion.VERSION_1_7.toString()
         }
     }
+}
+repositories {
+    mavenCentral()
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
 }
