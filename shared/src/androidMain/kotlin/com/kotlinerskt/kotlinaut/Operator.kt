@@ -1,16 +1,13 @@
 package com.kotlinerskt.kotlinaut
 
 import android.util.Log
-import com.kotlinerskt.kotlinaut.control.MissionControlServiceGrpcKt
-import com.kotlinerskt.kotlinaut.control.MissionRequest
-import com.kotlinerskt.kotlinaut.control.MissionResponse
-import com.kotlinerskt.kotlinaut.control.PlayerInfo
+import com.kotlinerskt.kotlinaut.control.*
 import io.grpc.ManagedChannelBuilder
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 
 class Operator {
-    val channel = ManagedChannelBuilder.forAddress("192.168.100.7", 8490)
+    val channel = ManagedChannelBuilder.forAddress("192.168.100.14", 8490)
         .usePlaintext()
         .build()
 
@@ -19,6 +16,10 @@ class Operator {
     }
     private val missionStub by lazy {
         MissionControlServiceGrpcKt.MissionControlServiceCoroutineStub(channel)
+    }
+
+    private val chubyStub by lazy {
+        WheresChubyServiceGrpcKt.WheresChubyServiceCoroutineStub(channel)
     }
 
     suspend fun register(clientId: String): RegisterClientResponse {
@@ -39,5 +40,11 @@ class Operator {
             Log.d("OperatorLib", "Arriving message…")
             Log.d("OperatorLib", "$it")
         }
+    }
+
+    suspend fun locateChuby(videoVersion: String): ChubyVisit {
+        val request = KotlinersKTVideo.newBuilder().setVersion(videoVersion).build()
+
+        return chubyStub.locate(request)
     }
 }

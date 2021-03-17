@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.kotlinerskt.kotlinaut.databinding.FragmentLoginBinding
+import com.kotlinerskt.kotlinaut.login.data.GRPCLocateRepository
 import com.kotlinerskt.kotlinaut.login.data.GRPCLoginRepository
+import com.kotlinerskt.kotlinaut.login.usecase.ChubyLocationUseCase
 import com.kotlinerskt.kotlinaut.login.usecase.NewAdventureUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
@@ -20,7 +22,10 @@ class LogInFragment : Fragment() {
 
     private var uiStateJob: Job? = null
     private val viewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(NewAdventureUseCase(GRPCLoginRepository()))
+        LoginViewModelFactory(
+            NewAdventureUseCase(GRPCLoginRepository()),
+            ChubyLocationUseCase(GRPCLocateRepository())
+        )
     }
 
     override fun onCreateView(
@@ -31,6 +36,11 @@ class LogInFragment : Fragment() {
         val binding: FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false)
         setupView(binding)
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.locateChuby("v.2.0.1")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +58,9 @@ class LogInFragment : Fragment() {
                         LoginViewModel.State.StartAdventure -> Timber.i("Start Adventure Please")
                         is LoginViewModel.State.Error -> {
                             showSnackMessage(view, state.errorMessage)
+                        }
+                        is LoginViewModel.State.ChubyLocation -> {
+                            Timber.tag("ChubyTag").i("Chuby is here: ${state.chubyVisit.location}")
                         }
                     }
                 }

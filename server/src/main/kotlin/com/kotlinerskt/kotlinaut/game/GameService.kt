@@ -13,7 +13,6 @@ class GameService(
 
     override suspend fun register(request: RegisterClientRequest): RegisterClientResponse {
         val clientId = request.clientId
-
         val token = generateToken(clientId)
 
         gameDB.registerOrRestart(GameId(clientId, token))

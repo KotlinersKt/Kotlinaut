@@ -61,6 +61,18 @@ message MissionResponse {
   repeated Interaction available_interactions = 2;
 }
 
+message ChubyVisit {
+  string location = 1;
+}
+
+message KotlinersKTVideo {
+  string version = 1;
+}
+
 service MissionControlService {
   rpc Interact (MissionRequest) returns (stream MissionResponse) {}
+}
+
+service WheresChubyService {
+  rpc Locate (KotlinersKTVideo) returns (ChubyVisit) {}
 }

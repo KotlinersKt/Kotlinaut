@@ -18,6 +18,7 @@ class BotClient(
 ) : Closeable {
     private val gameStub by lazy { GameGrpcKt.GameCoroutineStub(channel) }
     private val missionStub by lazy { MissionControlServiceGrpcKt.MissionControlServiceCoroutineStub(channel) }
+    private val chubyServiceStub by lazy { WheresChubyServiceGrpcKt.WheresChubyServiceCoroutineStub(channel) }
 
     lateinit var registerInfo: RegisterClientResponse
 
@@ -25,11 +26,20 @@ class BotClient(
         println("StartRegister")
         val request = RegisterClientRequest
             .newBuilder()
-            .setClientId("Gorro${Calendar.getInstance().time}").build()
+            .setClientId("Gorro${Calendar.getInstance().time}")
+            .build()
         registerInfo = gameStub.register(request)
         println(registerInfo.clientId)
         println(registerInfo.token)
 
+    }
+
+    suspend fun whereIsChuby(video: String?): String {
+        val request = KotlinersKTVideo.newBuilder()
+            .setVersion(video)
+            .build()
+        val chubyVisit = chubyServiceStub.locate(request)
+        return chubyVisit.location
     }
 
     suspend fun interact(bot: Bot, chatId: Long) {
@@ -75,14 +85,3 @@ class BotClient(
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS)
     }
 }
-
-//fun main() {
-//    println("Starting communication...")
-//
-//    runBlocking {
-//        val client = BotClient(ManagedChannelBuilder.forAddress("localhost", 8490).usePlaintext().build())
-//        client.register()
-//        delay(2000)
-//        client.interact()
-//    }
-//}

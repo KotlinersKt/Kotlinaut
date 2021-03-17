@@ -20,9 +20,10 @@ fun main(args: Array<String>) {
     runBlocking {
         val client = BotClient(ManagedChannelBuilder.forAddress("localhost", 8490).usePlaintext().build())
         val kotlinautBot = bot {
-            token = ""
+            token = "1495783449:AAE_VOgZKtlVMpifAqJDECGNTgSOV6aIXrc"
             logLevel = LogLevel.Network.Body
             dispatch {
+
                 command("start") {
                     initAdventure(bot, message, update)
                 }
@@ -55,6 +56,17 @@ fun main(args: Array<String>) {
                     }
                 }
 
+                command("chuby") {
+                    val video = args.firstOrNull()
+                    println("ARGGSSS ->>> ${args.joinToString()}")
+                    println("$video")
+                    runBlocking {
+                        val location = client.whereIsChuby(message.removeCommand("chuby"))
+                        println("Chuby Location---->>>>> $location")
+                        bot.sendMessage(chatId = message.chat.id, text = location)
+                    }
+                }
+
                 command("playlist") {
                     message.chat.id.let { id ->
                         bot.sendMessage(
@@ -81,8 +93,9 @@ fun main(args: Array<String>) {
         }
         kotlinautBot.startPolling()
     }
-
 }
+
+fun Message.removeCommand(command: String): String = text?.removePrefix("/$command")?.trim() ?: ""
 
 fun initAdventure(bot: Bot, message: Message, update: Update) {
     message.chat.id.let { id ->
